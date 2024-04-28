@@ -1,0 +1,12 @@
+diff --git a/node_modules/@picovoice/pvrecorder-node/package.json b/node_modules/@picovoice/pvrecorder-node/package.json
+index a219c15..7bc7741 100644
+--- a/node_modules/@picovoice/pvrecorder-node/package.json
++++ b/node_modules/@picovoice/pvrecorder-node/package.json
+@@ -3,6 +3,7 @@
+   "version": "1.2.2",
+   "description": "Audio recorder sdk for Nodejs.",
+   "main": "dist/index.js",
++  "types": "dist/types/index.d.ts",
+   "keywords": [
+     "audio, audio recorder"
+   ],

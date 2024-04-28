@@ -1,0 +1,32 @@
+{
+  "dependencies": {
+    "@picovoice/cheetah-node": "^2.0.1",
+    "@picovoice/porcupine-node": "^3.0.2",
+    "@t3-oss/env-core": "0.9.1",
+    "elevenlabs": "^0.4.0",
+    "lodash": "^4.17.21",
+    "openai": "^4.38.5",
+    "patch-package": "^8.0.0",
+    "zod": "^3.23.4"
+  },
+  "devDependencies": {
+    "@picovoice/pvrecorder-node": "^1.2.2",
+    "@types/lodash": "^4.17.0",
+    "@types/node": "^20.12.7",
+    "dotenv": "^16.4.5",
+    "dotenv-cli": "^7.4.1",
+    "eslint": "^8.57.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-promise": "^6.1.1",
+    "ts-node": "10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.4.5"
+  },
+  "scripts": {
+    "start": "dotenv -- ts-node ./src/index.ts",
+    "cache": "dotenv -- ts-node ./src/cache-all.ts",
+    "postinstall": "patch-package"
+  }
+}
