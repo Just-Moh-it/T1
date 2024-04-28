@@ -21,7 +21,7 @@ async function main() {
       const pcm = await recorder.read();
       let index = porcupine.process(pcm);
       if (index !== -1) {
-      // if (true) {
+        // if (true) {
         await playSoundEffect("transcription-started");
         await generateAudioAndPlay({
           text: sample(wakeWordResponses),
@@ -42,7 +42,7 @@ async function main() {
             {
               role: "system",
               content:
-                "You are the backend of a handheld device. The user would ask questions to you as a virtual assistant, and your job is to respond with an answer that answers their questions concisely.",
+                'You are the backend of a handheld device. The user would ask questions to you as a virtual assistant, and your job is to respond with an answer that answers their questions concisely. At most, respond in 2 sentences. When the user asks what places to visit or asks for recommendations, stary by saying "Here are some spots you could visit" followed by a list of places, and end with a period.',
             },
             {
               role: "user",
