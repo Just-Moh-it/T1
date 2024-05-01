@@ -1,9 +1,10 @@
+import { VoiceManager } from "@/voice";
 import { spawn } from "child_process";
 import { CloseEvent, Event, MessageEvent, WebSocket } from "ws";
-import { voiceManager } from "@/index";
 
 export async function streamAudio(
-  textStream: AsyncGenerator<string, void, void>
+  textStream: AsyncGenerator<string, void, void>,
+  voiceManager: VoiceManager
 ): Promise<void> {
   const model = "eleven_turbo_v2";
   const wsUrl = `wss://api.elevenlabs.io/v1/text-to-speech/${voiceManager.getVoiceId()}/stream-input?model_id=${model}`;

@@ -1,12 +1,13 @@
+import { playSoundEffect } from "@/sounds";
 import libcamera from "node-libcamera";
 import path from "path";
 
 export async function takePicture() {
-  const data = await libcamera.still({
+  await libcamera.still({
     output: path.resolve("./assets/capture.jpg"),
+    width: 640,
+    height: 480,
   });
 
-  return data;
+  await playSoundEffect("picture");
 }
-
-takePicture()

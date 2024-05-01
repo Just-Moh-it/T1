@@ -4,16 +4,18 @@ import { createReadStream, createWriteStream, existsSync } from "fs";
 import { join } from "path";
 import { createHash } from "crypto";
 import { PassThrough } from "stream";
-import { voiceManager } from "@/index";
+import { VoiceManager } from "@/voice";
 
 export const voiceId = "BLqAt1EJXEKGlw7i6QFf";
 
 export async function generateAudioAndPlay({
   text,
   disableFromCache,
+  voiceId,
 }: {
   text: string;
   disableFromCache?: boolean;
+  voiceId: string;
 }) {
   const hash = createHash("sha256").update(text).digest("hex");
   const outputPath = join(
@@ -27,7 +29,7 @@ export async function generateAudioAndPlay({
   }
 
   const audio = await elevenlabs.generate({
-    voice: voiceManager.getVoiceId(),
+    voice: voiceId,
     text,
     model_id: "eleven_multilingual_v2",
     stream: true,

@@ -3,6 +3,7 @@ import { porcupine } from "@/lib/porcupine";
 import { functionCallOrTextStream } from "@/llm";
 import { playSoundEffect } from "@/sounds";
 import { uploadFile } from "@/storage";
+import { takePicture } from "@/take-picture";
 import { transcribe } from "@/transcribe";
 import { generateAudioAndPlay } from "@/tts";
 import { streamAudio } from "@/tts-via-ws";
@@ -88,7 +89,10 @@ async function sendToOpenaiAndProceed(params?: { text?: string }) {
     switch (functionCall.name) {
       case "clearChat":
         history = [...initialMessages];
-        await generateAudioAndPlay({ text: "Ok, I've cleared the chat." });
+        await generateAudioAndPlay({
+          text: "Ok, I've cleared the chat.",
+          voiceId: voiceManager.getVoiceId(),
+        });
         break;
       case "changeVoice":
         const args = JSON.parse(functionCall.arguments);
@@ -100,6 +104,7 @@ async function sendToOpenaiAndProceed(params?: { text?: string }) {
           voiceManager.setVoice(newVoice as any);
           await generateAudioAndPlay({
             text: `Hey, this is ${newVoice} now. How could I help you?`,
+            voiceId: voiceManager.getVoiceId(),
           });
         } else {
           console.log(
@@ -108,19 +113,26 @@ async function sendToOpenaiAndProceed(params?: { text?: string }) {
           );
           await generateAudioAndPlay({
             text: "I'm sorry, I'm having trouble picking a voice",
+            voiceId: voiceManager.getVoiceId(),
           });
         }
         break;
       case "takePicture":
         await generateAudioAndPlay({
           text: "I'm taking a picture now",
+          voiceId: voiceManager.getVoiceId(),
         });
 
-        const data = readFileSync(path.resolve("./assets/test.jpeg"));
+        await takePicture();
+
+        const data = readFileSync(path.resolve("./assets/capture.jpg"));
 
         const url = await uploadFile(data);
 
-        generateAudioAndPlay({ text: "Just took a picture and uploaded" });
+        generateAudioAndPlay({
+          text: "Just took a picture and uploaded",
+          voiceId: voiceManager.getVoiceId(),
+        });
 
         history.push({
           role: "user",
@@ -139,13 +151,14 @@ async function sendToOpenaiAndProceed(params?: { text?: string }) {
 
     isFunctionCall = false;
   } else {
-    await streamAudio(textGenerator as AsyncGenerator<string>);
+    await streamAudio(textGenerator as AsyncGenerator<string>, voiceManager);
   }
 }
 
 async function getUserInputAndIndicateViaSounds() {
   await generateAudioAndPlay({
     text: sample(wakeWordResponses),
+    voiceId: voiceManager.getVoiceId(),
   });
 
   console.log("Transcribing");
