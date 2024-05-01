@@ -15,6 +15,12 @@
       "name": "Run npm start",
       "request": "launch",
       "type": "node-terminal"
+    },
+    {
+      "command": "npm run picture",
+      "name": "Run npm picture",
+      "request": "launch",
+      "type": "node-terminal"
     }
   ]
 }

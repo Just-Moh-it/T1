@@ -6,6 +6,7 @@
     "@t3-oss/env-core": "0.9.1",
     "elevenlabs": "^0.4.0",
     "lodash": "^4.17.21",
+    "node-libcamera": "^1.0.6",
     "openai": "^4.38.5",
     "patch-package": "^8.0.0",
     "ws": "^8.17.0",
@@ -31,6 +32,7 @@
     "start": "dotenv -- ts-node ./src/index.ts",
     "cache": "dotenv -- ts-node ./src/cache-all.ts",
     "s3": "dotenv -- ts-node ./src/storage.ts",
+    "picture": "dotenv -- ts-node ./src/take-picture.ts",
     "postinstall": "patch-package"
   }
 }
