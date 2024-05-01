@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.565.0",
     "@picovoice/cheetah-node": "^2.0.1",
     "@picovoice/porcupine-node": "^3.0.2",
     "@t3-oss/env-core": "0.9.1",
@@ -7,12 +8,14 @@
     "lodash": "^4.17.21",
     "openai": "^4.38.5",
     "patch-package": "^8.0.0",
+    "ws": "^8.17.0",
     "zod": "^3.23.4"
   },
   "devDependencies": {
     "@picovoice/pvrecorder-node": "^1.2.2",
     "@types/lodash": "^4.17.0",
     "@types/node": "^20.12.7",
+    "@types/ws": "^8.5.10",
     "dotenv": "^16.4.5",
     "dotenv-cli": "^7.4.1",
     "eslint": "^8.57.0",
@@ -27,6 +30,7 @@
   "scripts": {
     "start": "dotenv -- ts-node ./src/index.ts",
     "cache": "dotenv -- ts-node ./src/cache-all.ts",
+    "s3": "dotenv -- ts-node ./src/storage.ts",
     "postinstall": "patch-package"
   }
 }

@@ -4,8 +4,9 @@ import { createReadStream, createWriteStream, existsSync } from "fs";
 import { join } from "path";
 import { createHash } from "crypto";
 import { PassThrough } from "stream";
+import { voiceManager } from "@/index";
 
-const voiceId = "BLqAt1EJXEKGlw7i6QFf";
+export const voiceId = "BLqAt1EJXEKGlw7i6QFf";
 
 export async function generateAudioAndPlay({
   text,
@@ -26,7 +27,7 @@ export async function generateAudioAndPlay({
   }
 
   const audio = await elevenlabs.generate({
-    voice: voiceId,
+    voice: voiceManager.getVoiceId(),
     text,
     model_id: "eleven_multilingual_v2",
     stream: true,
